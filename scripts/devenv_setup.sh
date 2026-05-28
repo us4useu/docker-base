@@ -7,9 +7,9 @@
 # We can't do this statically in compose.yml because we file differs per architecture
 # For compatibility, check if $(pwd)/.docker/linux_$(uname -m).profile exists first
 # Also check if a profile already exists to avoid overwriting it with a default one
-if [ -f "$(pwd)/.docker/linux_$(uname -m).profile" ] && [ ! -f "/root/.conan2/profiles/default" ]; then
+if [ -f "$(pwd)/.conan/linux_$(uname -m).profile" ] && [ ! -f "/root/.conan2/profiles/default" ]; then
     mkdir -p /root/.conan2/profiles
-    cp "$(pwd)/.docker/linux_$(uname -m).profile" /root/.conan2/profiles/default
+    cp "$(pwd)/.conan/linux_$(uname -m).profile" /root/.conan2/profiles/default
 fi
 
 # Set history file to a location inside the container workspace, to keep it persistent across sessions.

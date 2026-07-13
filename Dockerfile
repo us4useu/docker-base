@@ -71,7 +71,8 @@ RUN apt-get update \
     lsb-release \
     software-properties-common \
     gnupg \
-    dh-dkms
+    dh-dkms \
+    nano
 
 RUN echo "alias python=python3" >> /root/.bashrc
 
@@ -87,17 +88,12 @@ RUN echo "export CXX=/usr/bin/clang++-$CLANG_VERSION" >> /root/.bashrc
 RUN apt-get update \
  && apt-get install -yq --no-install-recommends \
     libc++-$CLANG_VERSION-dev \
-    libc++abi-$CLANG_VERSION-dev
+    libc++abi-$CLANG_VERSION-dev \
+    clang-tidy-$CLANG_VERSION
 
 # Copy the devenv setup script to the container
 COPY scripts/devenv_setup.sh /root/devenv_setup.sh
 RUN chmod +x /root/devenv_setup.sh
-
-# Swig
-RUN apt-get update && apt-get install -yq --no-install-recommends libpcre3-dev \
- && wget https://github.com/us4useu/swig/releases/download/v4.0.2/swig-4.0.2.tar.gz -O swig-4.0.2.tar.gz \
- && tar -xvf swig-4.0.2.tar.gz && cd swig-4.0.2 \
- && ./configure && make && make install
 
 # Python dependencies and conan
 RUN python3 -m pip install virtualenv \
@@ -109,6 +105,7 @@ RUN python3 -m pip install virtualenv \
     six==1.16.0 \
     breathe==4.33.1 \
     docutils==0.16 \
+    && python3 -m pip install \
     "git+https://github.com/pjarosik/matlabdomain@master#egg=sphinxcontrib-matlabdomain" \
     "git+https://github.com/us4useu/pydevops@clang-dev" \
     && python3 -m pip install conan

@@ -106,9 +106,9 @@ RUN python3 -m pip install virtualenv \
     breathe==4.33.1 \
     docutils==0.16 \
     && python3 -m pip install \
-    "git+https://github.com/pjarosik/matlabdomain@master#egg=sphinxcontrib-matlabdomain" \
     "git+https://github.com/us4useu/pydevops@clang-dev" \
     && python3 -m pip install conan
+
 
 WORKDIR /
 

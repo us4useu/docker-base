@@ -106,7 +106,7 @@ RUN python3 -m pip install virtualenv \
     breathe==4.33.1 \
     docutils==0.16 \
     && python3 -m pip install \
-    "git+https://github.com/us4useu/pydevops@ref-M_US4R-104" \
+    "git+https://github.com/us4useu/pydevops@master" \
     && python3 -m pip install conan
 
 WORKDIR /
